@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.34202.233
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorBootcamp.Server", "BlazorBootcamp.Server\BlazorBootcamp.Server.csproj", "{4D7863DA-B2E2-4565-AB0D-A32C1AF66CDC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorBootcamp.Server", "BlazorBootcamp.Server\BlazorBootcamp.Server.csproj", "{4D7863DA-B2E2-4565-AB0D-A32C1AF66CDC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorBootcamp.Client", "BlazorBootcamp.Client\BlazorBootcamp.Client.csproj", "{FFBFD1CD-0B0E-4659-A1EA-1D06CB8437C8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorBootcamp.Client", "BlazorBootcamp.Client\BlazorBootcamp.Client.csproj", "{FFBFD1CD-0B0E-4659-A1EA-1D06CB8437C8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorBootcamp.Models", "BlazorBootcamp.Models\BlazorBootcamp.Models.csproj", "{8A96EFC1-9203-4582-B015-11C90050C172}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorBootcamp.Models", "BlazorBootcamp.Models\BlazorBootcamp.Models.csproj", "{8A96EFC1-9203-4582-B015-11C90050C172}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
