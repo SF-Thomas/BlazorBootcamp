@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorBootcamp.Server", "Bl
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorBootcamp.Client", "BlazorBootcamp.Client\BlazorBootcamp.Client.csproj", "{FFBFD1CD-0B0E-4659-A1EA-1D06CB8437C8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorBootcamp.Models", "BlazorBootcamp.Models\BlazorBootcamp.Models.csproj", "{8A96EFC1-9203-4582-B015-11C90050C172}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{FFBFD1CD-0B0E-4659-A1EA-1D06CB8437C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FFBFD1CD-0B0E-4659-A1EA-1D06CB8437C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FFBFD1CD-0B0E-4659-A1EA-1D06CB8437C8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8A96EFC1-9203-4582-B015-11C90050C172}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A96EFC1-9203-4582-B015-11C90050C172}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A96EFC1-9203-4582-B015-11C90050C172}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8A96EFC1-9203-4582-B015-11C90050C172}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
