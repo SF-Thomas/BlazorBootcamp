@@ -1,0 +1,23 @@
+﻿@page "/learn/parentcomponent"
+
+<h3>Parent Child relation</h3>
+
+<p><b>@message</b></p>
+
+<ChildComponent Title="This title is passed as parameter from the parent component." OnButtonClick="ShowMessage">
+	Render fragment from parent.
+</ChildComponent>
+
+@* <ChildComponent Title="This is second child component."/> *@
+
+<AnotherChildComponent PlaceHolder="Placeholder from parent" />
+<AnotherChildComponent MaxLength="5"/>
+
+@code {
+	public string message { get; set; } = string.Empty;
+
+	private void ShowMessage()
+	{
+		message = "Button clicked from child component";
+	}
+}

@@ -3,6 +3,7 @@
 	<h4 class="text-secondary">Product - @Product.Id</h4>
 	Add to favorite <input type="checkbox" @onchange="FavoriteUpdated" /><br />
 	Name: @Product.Name<br />
+	<p>RF from parent - @FirstFragment @SecondFragment</p>
 	Show properties: <input type="checkbox" @bind-value="Product.IsActive" checked="@(Product.IsActive?"checked":null)" /><br />
 
 	@if (Product.IsActive)
@@ -17,6 +18,12 @@
 </div>
 
 @code {
+	[Parameter]
+	public RenderFragment? FirstFragment { get; set; }
+
+	[Parameter]
+	public RenderFragment? SecondFragment { get; set; }
+
 	[Parameter]
 	public DemoProduct Product { get; set; } = new DemoProduct();
 

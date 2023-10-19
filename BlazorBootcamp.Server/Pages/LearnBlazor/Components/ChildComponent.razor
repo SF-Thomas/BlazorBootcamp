@@ -1,0 +1,25 @@
+﻿<div>
+	<div class="alert alert-info">@Title</div>
+	<div class="alert alert-success">
+		@if (ChildContent is not null)
+		{
+			<span>@ChildContent</span>
+		}
+		else
+		{
+			<span>Hello from empty render fragment</span>
+		}
+	</div>
+	<button class="btn btn-danger mb-1" @onclick="OnButtonClick">Button to be clicked</button>
+</div>
+
+@code {
+	[Parameter]
+	public string Title { get; set; } = string.Empty;
+
+	[Parameter]
+	public RenderFragment? ChildContent { get; set; }
+
+	[Parameter]
+	public EventCallback OnButtonClick { get; set; }
+}
