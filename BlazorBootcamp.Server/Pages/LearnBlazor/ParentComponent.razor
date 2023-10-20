@@ -4,16 +4,26 @@
 
 <p><b>@message</b></p>
 
-<ChildComponent Title="This title is passed as parameter from the parent component." OnButtonClick="ShowMessage">
+<ChildComponent Title="This title is passed as parameter from the parent component."
+				MessageForGrandChild="This is a message from your parent"
+				OnButtonClick="ShowMessage">
 	Render fragment from parent.
 </ChildComponent>
 
 @* <ChildComponent Title="This is second child component."/> *@
 
-<AnotherChildComponent PlaceHolder="Placeholder from parent" />
-<AnotherChildComponent MaxLength="5"/>
+<AnotherChildComponent InputAttributes="InputAttributesFromParent" />
+<AnotherChildComponent placeholder="Placeholder from parent 2" />
 
 @code {
+
+	public Dictionary<string, object> InputAttributesFromParent { get; set; } = new Dictionary<string, object>()
+	{
+		{ "required", "required" },
+		{ "placeholder", "Placeholder from parent" },
+		{ "maxLength", 5 },
+	};
+
 	public string message { get; set; } = string.Empty;
 
 	private void ShowMessage()
