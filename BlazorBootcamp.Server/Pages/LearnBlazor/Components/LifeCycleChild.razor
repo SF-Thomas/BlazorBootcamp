@@ -1,0 +1,45 @@
+﻿<h3>Life Cycle Child</h3>
+
+@code {
+
+    [Parameter]
+    public int CountValue { get; set; }
+
+    List<string> EventTypes = new List<string>();
+
+    protected override void OnInitialized()
+    {
+        Console.WriteLine("Child - OnInitialized is called");
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        Console.WriteLine("Child - OnInitializedAsync is called");
+    }
+
+    protected override void OnParametersSet()
+    {
+        Console.WriteLine("Child - OnParametersSet is called");
+    }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        Console.WriteLine("Child - OnParametersSetAsync is called");
+    }
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        Console.WriteLine("Child - OnAfterRender is called");
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        Console.WriteLine("Child - OnAfterRenderAsync is called");
+    }
+
+    protected override bool ShouldRender()
+    {
+        Console.WriteLine("Child - ShouldRender is called");
+        return base.ShouldRender();
+    }
+}
