@@ -1,4 +1,6 @@
-﻿<div>
+﻿@inject IJSRuntime IJSRuntime
+
+<div>
 	<div class="alert alert-info">@Title</div>
 	<div class="alert alert-success">
 		@if (ChildContent is not null)
@@ -27,4 +29,9 @@
 
 	[Parameter]
 	public string MessageForGrandChild { get; set; } = string.Empty;
+
+	public async Task ToasterSuccess()
+	{
+		await IJSRuntime.ToastrSuccessAsync("Operation Successful");
+	}
 }

@@ -6,7 +6,8 @@
 
 <ChildComponent Title="This title is passed as parameter from the parent component."
 				MessageForGrandChild="This is a message from your parent"
-				OnButtonClick="ShowMessage">
+				OnButtonClick="ShowMessage"
+				@ref="child">
 	Render fragment from parent.
 </ChildComponent>
 
@@ -14,8 +15,14 @@
 
 <AnotherChildComponent InputAttributes="InputAttributesFromParent" />
 <AnotherChildComponent placeholder="Placeholder from parent 2" />
+<br/>
+<div class="row">
+	<button class="btn btn-success" @onclick="()=> child.ToasterSuccess()" >Show Sweet Alert</button>
+</div>
 
 @code {
+
+	private ChildComponent child;
 
 	public Dictionary<string, object> InputAttributesFromParent { get; set; } = new Dictionary<string, object>()
 	{
