@@ -1,0 +1,83 @@
+﻿@page "/category/create"
+@page "/category/edit/{id:int}"
+@inject ICategoryRepository CategoryRepository
+@inject NavigationManager NavigationManager
+
+<div class="row my-2">
+	<h3 class="card-title text-primary mb-3 ms-3">@Title Category</h3>
+
+	<div class="col-10">
+		@if (IsLoading)
+		{
+			<div class="text-center">
+				<img src="/images/loading.gif" />
+			</div>
+		}
+		else
+		{
+			<EditForm Model="Category" OnValidSubmit="UpsertCategory">
+				<DataAnnotationsValidator />
+				<ValidationSummary />
+				<div class="mb-3">
+					<label>Name</label>
+					<InputText @bind-Value="Category.Name" class="form-control" />
+					<ValidationMessage For="()=> Category.Name" />
+				</div>
+				<div class="mb-3">
+					<button class="btn btn-primary">@Title</button>
+					<NavLink href="/category">Back to index</NavLink>
+				</div>
+			</EditForm>
+		}
+	</div>
+
+</div>
+
+@code {
+	[Parameter]
+	public int Id { get; set; }
+	private CategoryDto Category { get; set; } = new CategoryDto();
+	private string Title { get; set; } = "Create";
+	public bool IsLoading { get; set; }
+
+	protected override async Task OnAfterRenderAsync(bool firstRender)
+	{
+		if (firstRender)
+		{
+			if (Id == 0)
+			{
+				IsLoading = false;
+			}
+			else
+			{
+				Title = "Update";
+				await LoadCategory();
+			}
+		}
+
+	}
+
+	protected async Task LoadCategory()
+	{
+		IsLoading = true;
+		StateHasChanged();
+		Category = await CategoryRepository.Get(Id);
+		IsLoading = false;
+		StateHasChanged();
+	}
+
+
+	private async void UpsertCategory()
+	{
+		if (Id == 0)
+		{
+			await CategoryRepository.Create(Category);
+			NavigationManager.NavigateTo("category");
+		}
+		else
+		{
+			await CategoryRepository.Update(Category);
+			NavigationManager.NavigateTo("category");
+		}
+	}
+}
