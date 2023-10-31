@@ -21,4 +21,8 @@
     <ProjectReference Include="..\BlazorBootcamp.Models\BlazorBootcamp.Models.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\images\product\" />
+  </ItemGroup>
+
 </Project>

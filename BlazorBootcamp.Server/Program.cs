@@ -8,6 +8,7 @@ using BlazorBootcamp.DataAccess.Data;
 using Microsoft.EntityFrameworkCore;
 using BlazorBootcamp.Business.Repository;
 using System.Collections.Concurrent;
+using BlazorBootcamp.Server.Service;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,6 +19,7 @@ builder.Services.AddSingleton<WeatherForecastService>();
 
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
+builder.Services.AddScoped<IFileUpload, FileUpload>();
 
 
 builder.Services.AddDbContext<DataContext>(options => 
