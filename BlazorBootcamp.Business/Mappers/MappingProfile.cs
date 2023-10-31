@@ -13,7 +13,8 @@ namespace BlazorBootcamp.Business.Mappers
     {
         public MappingProfile()
         {
-            CreateMap<Category, CategoryDto>().ReverseMap();  
+            CreateMap<Category, CategoryDTO>().ReverseMap();  
+            CreateMap<Product, ProductDTO>().ReverseMap();  
         }
     }
 }

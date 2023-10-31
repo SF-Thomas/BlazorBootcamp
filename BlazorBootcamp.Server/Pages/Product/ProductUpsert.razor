@@ -1,0 +1,119 @@
+﻿@page "/product/create"
+@page "/product/edit/{id:int}"
+@inject ICategoryRepository CategoryRepository
+@inject IProductRepository ProductRepository
+@inject NavigationManager NavigationManager
+
+<div class="row my-2">
+	<h3 class="card-title text-primary mb-3 ms-3">@Title Category</h3>
+
+	<div class="col-10">
+		@if (IsLoading)
+		{
+			<div class="text-center">
+				<img src="/images/loading.gif" />
+			</div>
+		}
+		else
+		{
+			<EditForm Model="Product" OnValidSubmit="UpsertProduct">
+				<DataAnnotationsValidator />
+				<ValidationSummary />
+				<div class="mb-3">
+					<label>Name</label>
+					<InputText @bind-Value="Product.Name" class="form-control" />
+					<ValidationMessage For="()=> Product.Name" />
+				</div>
+				<div class="mb-3">
+					<label>Color</label>
+					<InputText @bind-Value="Product.Color" class="form-control" />
+				</div>
+				<div class="mb-3">
+					<label>Description</label>
+					<InputTextArea @bind-Value="Product.Description" class="form-control" />
+					<ValidationMessage For="()=> Product.Description" />
+				</div>
+				<div class="row pt-3">
+					<div class="form-group col-6">
+						<div class="form-check">
+							<InputCheckbox @bind-Value="Product.ShopFavorites" class="form-check-input"></InputCheckbox>
+							<label class="form-check-label">Is Shop Favorites</label>
+						</div>
+					</div>
+				</div>
+				<div class="form-group col-6">
+					<div class="form-check">
+						<InputCheckbox @bind-Value="Product.CustomerFavorites" class="form-check-input"></InputCheckbox>
+						<label class="form-check-label">Is Customer Favorites</label>
+					</div>
+				</div>
+				<div class="form-group col-6">
+					<label>Category</label>
+					<InputSelect @bind-Value="Product.CategoryId" class="form-select">
+						<option value="0" disabled="disabled" selected>--Select Category--</option>
+						@foreach (var category in Categories)
+						{
+							<option value="@category.Id">@category.Name</option>
+						}
+					</InputSelect>
+					<ValidationMessage For="()=> Product.CategoryId" />
+				</div>
+				<div class="mb-3">
+					<button class="btn btn-primary">@Title</button>
+					<NavLink href="/product">Back to index</NavLink>
+				</div>
+			</EditForm>
+		}
+	</div>
+
+</div>
+
+@code {
+	[Parameter]
+	public int Id { get; set; }
+
+
+	private IEnumerable<CategoryDTO> Categories { get; set; } = new List<CategoryDTO>();
+	private ProductDTO Product { get; set; } = new ProductDTO();
+	private string Title { get; set; } = "Create";
+	public bool IsLoading { get; set; }
+
+	protected override async Task OnAfterRenderAsync(bool firstRender)
+	{
+		if (firstRender)
+		{
+			await LoadProduct();
+		}
+
+	}
+
+	protected async Task LoadProduct()
+	{
+		IsLoading = true;
+		StateHasChanged();
+		Categories = await CategoryRepository.GetAll();
+
+		if (Id != 0)
+		{
+			Title = "Update";
+			Product = await ProductRepository.Get(Id);
+		}
+
+		IsLoading = false;
+		StateHasChanged();
+	}
+
+
+	private async void UpsertProduct()
+	{
+		if (Id == 0)
+		{
+			await ProductRepository.Create(Product);
+		}
+		else
+		{
+			await ProductRepository.Update(Product);
+		}
+		NavigationManager.NavigateTo("product");
+	}
+}

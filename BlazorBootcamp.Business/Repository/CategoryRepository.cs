@@ -23,14 +23,14 @@ namespace BlazorBootcamp.Business.Repository
             _mapper = mapper;
         }
 
-        public async Task<CategoryDto> Create(CategoryDto category)
+        public async Task<CategoryDTO> Create(CategoryDTO entity)
         {
-            var obj = _mapper.Map<CategoryDto, Category>(category);
+            var obj = _mapper.Map<CategoryDTO, Category>(entity);
             obj.CreatedDate = DateTime.Now;
             var addedEntity = _context.Categories.Add(obj);
             await _context.SaveChangesAsync();
 
-            return _mapper.Map<Category, CategoryDto>(addedEntity.Entity);
+            return _mapper.Map<Category, CategoryDTO>(addedEntity.Entity);
         }
 
         public async Task<int> Delete(int id)
@@ -44,32 +44,32 @@ namespace BlazorBootcamp.Business.Repository
             return 0;
         }
 
-        public async Task<CategoryDto> Get(int id)
+        public async Task<CategoryDTO> Get(int id)
         {
             var obj = await _context.Categories.FirstOrDefaultAsync(u => u.Id == id);
             if (obj != null)
             {
-                return _mapper.Map<Category, CategoryDto>(obj);
+                return _mapper.Map<Category, CategoryDTO>(obj);
             }
-            return new CategoryDto();
+            return new CategoryDTO();
         }
 
-        public async Task<IEnumerable<CategoryDto>> GetAll()
+        public async Task<IEnumerable<CategoryDTO>> GetAll()
         {
-            return _mapper.Map<IEnumerable<Category>, IEnumerable<CategoryDto>>(_context.Categories);
+            return _mapper.Map<IEnumerable<Category>, IEnumerable<CategoryDTO>>(_context.Categories);
         }
 
-        public async Task<CategoryDto> Update(CategoryDto category)
+        public async Task<CategoryDTO> Update(CategoryDTO entity)
         {
-            var objFromDb = await _context.Categories.FirstOrDefaultAsync(u => u.Id == category.Id);
+            var objFromDb = await _context.Categories.FirstOrDefaultAsync(u => u.Id == entity.Id);
             if (objFromDb != null)
             {
-                objFromDb.Name = category.Name;
+                objFromDb.Name = entity.Name;
                 _context.Categories.Update(objFromDb);
                 await _context.SaveChangesAsync();
-                return _mapper.Map<Category, CategoryDto>(objFromDb);
+                return _mapper.Map<Category, CategoryDTO>(objFromDb);
             }
-            return category;
+            return entity;
 
         }
     }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BlazorBootcamp.Models
 {
-    public class CategoryDto
+    public class CategoryDTO
     {
         public int Id { get; set; }
         [Required]
