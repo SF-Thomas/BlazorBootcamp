@@ -33,7 +33,7 @@ namespace BlazorBootcamp.Server.Service
 			}
 			var filePath = Path.Combine(folderDirectory, fileName);
 
-			await using FileStream fs = new FileStream(filePath, FileMode.Create);
+			await using FileStream fs = new(filePath, FileMode.Create);
 			await file.OpenReadStream().CopyToAsync(fs);
 
 			var fullPath = $"/images/product/{fileName}";

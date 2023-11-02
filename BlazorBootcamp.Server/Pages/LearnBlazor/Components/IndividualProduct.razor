@@ -18,23 +18,23 @@
 </div>
 
 @code {
-	[Parameter]
-	public RenderFragment? FirstFragment { get; set; }
+    [Parameter]
+    public RenderFragment? FirstFragment { get; set; }
 
-	[Parameter]
-	public RenderFragment? SecondFragment { get; set; }
+    [Parameter]
+    public RenderFragment? SecondFragment { get; set; }
 
-	[Parameter]
-	public DemoProduct Product { get; set; } = new DemoProduct();
+    [Parameter]
+    public DemoProduct Product { get; set; } = new DemoProduct();
 
-	[Parameter]
-	public EventCallback<bool> OnFavoriteUpdated { get; set; }
-	
-	[Parameter]
-	public EventCallback<string> OnLastSelectedProductChange { get; set; }
+    [Parameter]
+    public EventCallback<bool> OnFavoriteUpdated { get; set; }
 
-	private async Task FavoriteUpdated(ChangeEventArgs e)
-	{
+    [Parameter]
+    public EventCallback<string> OnLastSelectedProductChange { get; set; }
+
+    private async Task FavoriteUpdated(Microsoft.AspNetCore.Components.ChangeEventArgs e)
+    {
 		await OnFavoriteUpdated.InvokeAsync((bool)e.Value);
 	}
 
