@@ -15,6 +15,7 @@ namespace BlazorBootcamp.Business.Mappers
         {
             CreateMap<Category, CategoryDTO>().ReverseMap();  
             CreateMap<Product, ProductDTO>().ReverseMap();  
+            CreateMap<ProductPrice, ProductPriceDTO>().ReverseMap();  
         }
     }
 }
