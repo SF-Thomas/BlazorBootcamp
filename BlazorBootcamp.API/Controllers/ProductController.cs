@@ -24,7 +24,7 @@ namespace BlazorBootcamp.API.Controllers
 			return Ok(await _productRepository.GetAll());
 		}
 
-		[HttpGet("productId")]
+		[HttpGet("{productId}")]
 		public async Task<IActionResult> Get(int? productId)
 		{
 			if(productId == null || productId == 0) 
