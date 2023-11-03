@@ -47,6 +47,7 @@ namespace BlazorBootcamp.Business.Repository
 		{
 			var obj = await _context.Products
 				.Include(p => p.Category)
+				.Include(p => p.ProductPrices)
 				.FirstOrDefaultAsync(u => u.Id == id);
 			if (obj != null)
 			{
@@ -57,7 +58,8 @@ namespace BlazorBootcamp.Business.Repository
 
 		public async Task<IEnumerable<ProductDTO>> GetAll()
 		{
-			return _mapper.Map<IEnumerable<Product>, IEnumerable<ProductDTO>>(_context.Products.Include(p => p.Category));
+			return _mapper.Map<IEnumerable<Product>, IEnumerable<ProductDTO>>(
+				_context.Products.Include(p => p.Category).Include(p => p.ProductPrices));
 		}
 
 		public async Task<ProductDTO> Update(ProductDTO entity)
