@@ -1,5 +1,10 @@
 ﻿@page "/details/{productId:int}"
+
+@using BlazorBootcamp.Client.ViewModels
 @inject IProductService ProductService
+@inject ICartService CartService
+@inject IJSRuntime JSRuntime
+@inject NavigationManager NavigationManager
 
 @if (IsProcessing)
 {
@@ -9,7 +14,7 @@
 }
 else
 {
-	<form method="post">
+	<EditForm OnValidSubmit="AddToCart" Model="DetailsVM" method="post">
 		<div class="card container mt-4">
 			<div class="card-header ml-0  row">
 				<div class="col-12 col-md-6">
@@ -29,19 +34,39 @@ else
 							<div class="row">
 								@foreach (var productPrice in Product.ProductPrices)
 								{
-									<div class="col-2 bg-light text-center pt-2 m-2" style="border:3px solid #28A745; border-radius:10px;box-shadow:5px">
-										<p>@productPrice.Size</p>
-										<p>@productPrice.Price.ToString("c")</p>
-									</div>
+									if (productPrice.Id == DetailsVM.SelectedProductPriceId)
+									{
+										//this product is selected by user
+										<div class="col-2 bg-light text-center pt-2 m-2" style="border:3px solid #28A745; border-radius:10px;box-shadow:5px">
+											<p>@productPrice.Size</p>
+											<p>@productPrice.Price.ToString("c")</p>
+										</div>
+									}
+									else
+									{
+										//all other products
+										<div class="col-2 bg-light text-center pt-2 m-2" style="border:1px solid; border-radius:10px;box-shadow:5px"
+										@onclick="(args)=>SelectedProductPrice(args,productPrice.Id)">
+											<p>@productPrice.Size</p>
+											<p>@productPrice.Price.ToString("c")</p>
+										</div>
+									}
 								}
 
-								<div class="row pl-2">
-									<div class="col-2 text-primary"><h4>Count</h4></div>
-									<div class="col-10">
-										<input type="text" class="form-control" />
-
+								@if (!Product.ProductPrices.Any())
+								{
+									<p class="text-warning">No Size available yet...</p>
+								}
+								else
+								{
+									<div class="row pl-2">
+										<div class="col-2 text-primary"><h4>Count</h4></div>
+										<div class="col-10">
+											<InputNumber @bind-Value="DetailsVM.Count" class="form-control" />
+											<ValidationMessage For="()=>DetailsVM.Count"></ValidationMessage>
+										</div>
 									</div>
-								</div>
+								}
 							</div>
 						</div>
 						<div class="col-2">
@@ -55,13 +80,21 @@ else
 							<a class="btn btn-success form-control " href="/">Back to Home</a>
 						</div>
 						<div class="col-12 col-md-6 pb-1">
-							<button type="submit" value="Add to Cart" class="btn btn-primary form-control">Add to Cart</button>
+							@if (DetailsVM.SelectedProductPriceId > 0)
+							{
+							//item has been selected
+								<button type="submit" value="Add to Cart" class="btn btn-primary form-control">Add to Cart</button>
+							}
+							else
+							{
+								<button type="submit" value="Add to Cart" disabled class="btn btn-primary form-control">Add to Cart</button>
+							}
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-	</form>
+	</EditForm>
 }
 
 
@@ -76,10 +109,32 @@ else
 	public ProductDTO Product { get; set; } = new();
 	public bool IsProcessing { get; set; } = false;
 
+	public DetailsVM DetailsVM { get; set; } = new();
+
 	protected override async Task OnInitializedAsync()
 	{
 		IsProcessing = true;
 		Product = await ProductService.Get(ProductId);
 		IsProcessing = false;
+	}
+
+	private async Task SelectedProductPrice(MouseEventArgs e, int productPriceId)
+	{
+		DetailsVM.ProductPrice = Product.ProductPrices.FirstOrDefault(u => u.Id == productPriceId);
+		DetailsVM.SelectedProductPriceId = productPriceId;
+	}
+
+	private async Task AddToCart()
+	{
+		ShoppingCart shoppingCart = new()
+			{
+				Count = DetailsVM.Count,
+				ProductId = ProductId,
+				ProductPriceId = DetailsVM.SelectedProductPriceId
+			};
+
+		await CartService.IncrementCart(shoppingCart);
+		NavigationManager.NavigateTo("/");
+		await JSRuntime.ToastrSuccessAsync("Product added to cart successfully");
 	}
 }
