@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BlazorBootcamp.DataAccess.Migrations
 {
-    [DbContext(typeof(DataContext))]
+    [DbContext(typeof(ApplicationDbContext))]
     [Migration("20231023130029_AddCategoryToDatabase")]
     partial class AddCategoryToDatabase
     {

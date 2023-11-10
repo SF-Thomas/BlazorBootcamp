@@ -14,10 +14,10 @@ namespace BlazorBootcamp.Business.Repository
 {
     public class CategoryRepository : ICategoryRepository
     {
-        private readonly DataContext _context;
+        private readonly ApplicationDbContext _context;
         private readonly IMapper _mapper;
 
-        public CategoryRepository(DataContext context, IMapper mapper)
+        public CategoryRepository(ApplicationDbContext context, IMapper mapper)
         {
             _context = context;
             _mapper = mapper;

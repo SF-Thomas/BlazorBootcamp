@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\BlazorBootcamp.Common\BlazorBootcamp.Common.csproj" />
     <ProjectReference Include="..\BlazorBootcamp.DataAccess\BlazorBootcamp.DataAccess.csproj" />
     <ProjectReference Include="..\BlazorBootcamp.Models\BlazorBootcamp.Models.csproj" />
   </ItemGroup>

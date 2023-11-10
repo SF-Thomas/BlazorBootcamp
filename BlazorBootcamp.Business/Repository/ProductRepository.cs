@@ -14,10 +14,10 @@ namespace BlazorBootcamp.Business.Repository
 {
 	public class ProductRepository : IProductRepository
 	{
-		private readonly DataContext _context;
+		private readonly ApplicationDbContext _context;
 		private readonly IMapper _mapper;
 
-		public ProductRepository(DataContext context, IMapper mapper)
+		public ProductRepository(ApplicationDbContext context, IMapper mapper)
 		{
 			_context = context;
 			_mapper = mapper;

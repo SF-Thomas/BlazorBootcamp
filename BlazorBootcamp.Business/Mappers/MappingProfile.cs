@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using BlazorBootcamp.DataAccess;
+using BlazorBootcamp.DataAccess.ViewModel;
 using BlazorBootcamp.Models;
 using System;
 using System.Collections.Generic;
@@ -15,7 +16,10 @@ namespace BlazorBootcamp.Business.Mappers
         {
             CreateMap<Category, CategoryDTO>().ReverseMap();  
             CreateMap<Product, ProductDTO>().ReverseMap();  
-            CreateMap<ProductPrice, ProductPriceDTO>().ReverseMap();  
+            CreateMap<ProductPrice, ProductPriceDTO>().ReverseMap();
+            CreateMap<OrderHeaderDTO, OrderHeader>().ReverseMap();
+            CreateMap<OrderDetail, OrderDetailDTO>().ReverseMap();
+            CreateMap<OrderDTO, Order>().ReverseMap();
         }
     }
 }

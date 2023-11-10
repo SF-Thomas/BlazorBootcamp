@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BlazorBootcamp.DataAccess.Migrations
 {
-    [DbContext(typeof(DataContext))]
+    [DbContext(typeof(ApplicationDbContext))]
     [Migration("20231030095347_AddPRoductToDB")]
     partial class AddPRoductToDB
     {

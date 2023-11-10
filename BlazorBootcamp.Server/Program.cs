@@ -10,6 +10,7 @@ using BlazorBootcamp.Business.Repository;
 using System.Collections.Concurrent;
 using BlazorBootcamp.Server.Service;
 using Syncfusion.Blazor;
+using Microsoft.AspNetCore.Identity;
 
 Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("Mjc5MzgzNkAzMjMzMmUzMDJlMzBoSnlrWS9vNFlPcXlWNjFibFE1citEZHVkbDQva0M1VnVQRkl4NTNLNkZZPQ==");
 
@@ -29,8 +30,10 @@ builder.Services.AddScoped<IProductPriceRepository, ProductPriceRepository>();
 builder.Services.AddScoped<IFileUpload, FileUpload>();
 
 
-builder.Services.AddDbContext<DataContext>(options => 
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddDefaultTokenProviders().AddDefaultUI()
+    .AddEntityFrameworkStores<ApplicationDbContext>();
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
@@ -53,6 +56,9 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+
+app.UseAuthentication();
+app.UseAuthorization();
 
 app.MapBlazorHub();
 app.MapFallbackToPage("/_Host");
