@@ -2,7 +2,7 @@
 @page "/category/edit/{id:int}"
 @inject ICategoryRepository CategoryRepository
 @inject NavigationManager NavigationManager
-
+@attribute [Authorize]
 <div class="row my-2">
 	<h3 class="card-title text-primary mb-3 ms-3">@Title Category</h3>
 

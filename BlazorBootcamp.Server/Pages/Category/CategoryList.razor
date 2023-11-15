@@ -2,7 +2,9 @@
 @inject ICategoryRepository CategoryRepository
 @inject NavigationManager NavigationManager
 @inject IJSRuntime JSRuntime
+@using BlazorBootcamp.Common
 
+@attribute [Authorize(Roles = SD.Role_Admin)]
 <DeleteConfirmation IsParentComponentProcessing="IsLoading" ConfirmationChanged="ConfirmDeleteClick"></DeleteConfirmation>
 <div class="row mt-4">
 	<div class="col-6">
