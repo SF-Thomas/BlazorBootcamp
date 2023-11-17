@@ -1,16 +1,10 @@
-using BlazorBootcamp.Server.Data;
-using BlazorBootcamp.DataAccess;
-using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Web;
-using Microsoft.EntityFrameworkCore.Query.Internal;
-using Microsoft.SqlServer.Server;
-using BlazorBootcamp.DataAccess.Data;
-using Microsoft.EntityFrameworkCore;
 using BlazorBootcamp.Business.Repository;
-using System.Collections.Concurrent;
+using BlazorBootcamp.DataAccess.Data;
+using BlazorBootcamp.Server.Data;
 using BlazorBootcamp.Server.Service;
-using Syncfusion.Blazor;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using Syncfusion.Blazor;
 
 Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("Mjc5MzgzNkAzMjMzMmUzMDJlMzBoSnlrWS9vNFlPcXlWNjFibFE1citEZHVkbDQva0M1VnVQRkl4NTNLNkZZPQ==");
 
