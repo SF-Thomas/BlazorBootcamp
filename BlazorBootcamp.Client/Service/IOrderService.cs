@@ -7,7 +7,8 @@ namespace BlazorBootcamp.Client.Service
         Task<IEnumerable<OrderDTO>> GetAll(string? userId);
         Task<OrderDTO> Get(int orderId);
 
-        //Task<OrderDTO> Create(StripePaymentDTO paymentDTO);
-        //Task<OrderHeaderDTO> MarkPaymentSuccessful(OrderHeaderDTO orderHeader);
+        Task<OrderDTO> Create(StripePaymentDTO paymentDTO);
+        
+        Task<OrderHeaderDTO> MarkPaymentSuccessful(OrderHeaderDTO orderHeader);
     }
 }
