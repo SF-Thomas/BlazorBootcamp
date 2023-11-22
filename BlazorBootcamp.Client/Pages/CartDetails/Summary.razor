@@ -4,9 +4,9 @@
 @inject ILocalStorageService _localStorage
 @inject IProductService _productService
 @inject IOrderService _orderService
-@* @inject IPaymentService _paymentService
+@* @inject IPaymentService _paymentService*@
 @using Microsoft.AspNetCore.Authorization
-@attribute [Authorize] *@
+@attribute [Authorize] 
 @if (IsProcessing)
 {
     <div style="position:fixed;top:50%;left:50%;margin-top:-50px;margin-left:-100px;">
@@ -142,15 +142,14 @@ else
             Order.OrderHeader.OrderTotal +=(item.Count * productPrice.Price);
         }
 
-        // if(await _localStorage.GetItemAsync<UserDTO>(SD.Local_UserDetails)!=null)
-        // {
-        //     var userInfo = await _localStorage.GetItemAsync<UserDTO>(SD.Local_UserDetails);
-        //     Order.OrderHeader.UserId=userInfo.Id;
-        //     Order.OrderHeader.Name = userInfo.Name;
-        //     Order.OrderHeader.Email = userInfo.Email;
-        //     Order.OrderHeader.PhoneNumber = userInfo.PhoneNumber;
-
-        // }
+        if(await _localStorage.GetItemAsync<UserDTO>(SD.Local_UserDetails)!=null)
+        {
+            var userInfo = await _localStorage.GetItemAsync<UserDTO>(SD.Local_UserDetails);
+            Order.OrderHeader.UserId=userInfo.Id;
+            Order.OrderHeader.Name = userInfo.Name;
+            Order.OrderHeader.Email = userInfo.Email;
+            Order.OrderHeader.PhoneNumber = userInfo.PhoneNumber;
+        }
 
         IsProcessing=false;
     }
