@@ -2,12 +2,6 @@
 using BlazorBootcamp.DataAccess.ViewModel;
 using BlazorBootcamp.DataAccess;
 using BlazorBootcamp.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 using BlazorBootcamp.DataAccess.Data;
 using BlazorBootcamp.Common;
 using Microsoft.EntityFrameworkCore;
@@ -40,18 +34,18 @@ namespace BlazorBootcamp.Business.Repository
             }
             if (orderHeader.Status == SD.Status_Confirmed)
             {
-                ////refund
-                //var options = new Stripe.RefundCreateOptions
-                //{
-                //    Reason = Stripe.RefundReasons.RequestedByCustomer,
-                //    PaymentIntent = orderHeader.PaymentIntentId
-                //};
+                //refund
+                var options = new Stripe.RefundCreateOptions
+                {
+                    Reason = Stripe.RefundReasons.RequestedByCustomer,
+                    PaymentIntent = orderHeader.PaymentIntentId
+                };
 
-                //var service = new Stripe.RefundService();
-                //Stripe.Refund refund = service.Create(options);
+                var service = new Stripe.RefundService();
+                Stripe.Refund refund = service.Create(options);
 
-                //orderHeader.Status = SD.Status_Refunded;
-                //await _context.SaveChangesAsync();
+                orderHeader.Status = SD.Status_Refunded;
+                await _context.SaveChangesAsync();
             }
 
             return _mapper.Map<OrderHeader, OrderHeaderDTO>(orderHeader);

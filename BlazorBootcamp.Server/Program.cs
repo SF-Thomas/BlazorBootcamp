@@ -4,6 +4,7 @@ using BlazorBootcamp.Server.Data;
 using BlazorBootcamp.Server.Service;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Stripe;
 using Syncfusion.Blazor;
 
 Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("Mjc5MzgzNkAzMjMzMmUzMDJlMzBoSnlrWS9vNFlPcXlWNjFibFE1citEZHVkbDQva0M1VnVQRkl4NTNLNkZZPQ==");
@@ -19,6 +20,7 @@ builder.Services.AddSyncfusionBlazor();
 builder.Services.AddSingleton<WeatherForecastService>();
 
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+builder.Services.AddScoped<IOrderRepository, OrderRepository>();
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<IProductPriceRepository, ProductPriceRepository>();
 builder.Services.AddScoped<IFileUpload, FileUpload>();
@@ -35,6 +37,8 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>()
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 var app = builder.Build();
+
+StripeConfiguration.ApiKey = builder.Configuration.GetSection("Stripe")["ApiKey"];
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
